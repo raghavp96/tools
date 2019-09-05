@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="flattenbookmarksdir" default="all">
+  
+  
+  <property file="flattenbookmarksdir.properties"/>
+  <!-- Uncomment the following property if no tests compilation is needed -->
+  <!-- 
+  <property name="skip.tests" value="true"/>
+   -->
+  
+  <!-- Compiler options -->
+  
+  <property name="compiler.debug" value="on"/>
+  <property name="compiler.generate.no.warnings" value="off"/>
+  <property name="compiler.args" value=""/>
+  <property name="compiler.max.memory" value="700m"/>
+  <patternset id="ignored.files">
+    <exclude name="**/*.hprof/**"/>
+    <exclude name="**/*.pyc/**"/>
+    <exclude name="**/*.pyo/**"/>
+    <exclude name="**/*.rbc/**"/>
+    <exclude name="**/*.yarb/**"/>
+    <exclude name="**/*~/**"/>
+    <exclude name="**/.DS_Store/**"/>
+    <exclude name="**/.git/**"/>
+    <exclude name="**/.hg/**"/>
+    <exclude name="**/.svn/**"/>
+    <exclude name="**/CVS/**"/>
+    <exclude name="**/__pycache__/**"/>
+    <exclude name="**/_svn/**"/>
+    <exclude name="**/vssver.scc/**"/>
+    <exclude name="**/vssver2.scc/**"/>
+  </patternset>
+  <patternset id="library.patterns">
+    <include name="*.war"/>
+    <include name="*.swc"/>
+    <include name="*.zip"/>
+    <include name="*.ear"/>
+    <include name="*.egg"/>
+    <include name="*.ane"/>
+    <include name="*.jar"/>
+  </patternset>
+  <patternset id="compiler.resources">
+    <exclude name="**/?*.java"/>
+    <exclude name="**/?*.form"/>
+    <exclude name="**/?*.class"/>
+    <exclude name="**/?*.groovy"/>
+    <exclude name="**/?*.scala"/>
+    <exclude name="**/?*.flex"/>
+    <exclude name="**/?*.kt"/>
+    <exclude name="**/?*.clj"/>
+    <exclude name="**/?*.aj"/>
+  </patternset>
+  
+  <!-- JDK definitions -->
+  
+  <property name="jdk.bin.1.8" value="${jdk.home.1.8}/bin"/>
+  <path id="jdk.classpath.1.8">
+    <fileset dir="${jdk.home.1.8}">
+      <include name="jre/lib/charsets.jar"/>
+      <include name="jre/lib/deploy.jar"/>
+      <include name="jre/lib/ext/access-bridge-64.jar"/>
+      <include name="jre/lib/ext/cldrdata.jar"/>
+      <include name="jre/lib/ext/dnsns.jar"/>
+      <include name="jre/lib/ext/jaccess.jar"/>
+      <include name="jre/lib/ext/jfxrt.jar"/>
+      <include name="jre/lib/ext/localedata.jar"/>
+      <include name="jre/lib/ext/nashorn.jar"/>
+      <include name="jre/lib/ext/sunec.jar"/>
+      <include name="jre/lib/ext/sunjce_provider.jar"/>
+      <include name="jre/lib/ext/sunmscapi.jar"/>
+      <include name="jre/lib/ext/sunpkcs11.jar"/>
+      <include name="jre/lib/ext/zipfs.jar"/>
+      <include name="jre/lib/javaws.jar"/>
+      <include name="jre/lib/jce.jar"/>
+      <include name="jre/lib/jfr.jar"/>
+      <include name="jre/lib/jfxswt.jar"/>
+      <include name="jre/lib/jsse.jar"/>
+      <include name="jre/lib/management-agent.jar"/>
+      <include name="jre/lib/plugin.jar"/>
+      <include name="jre/lib/resources.jar"/>
+      <include name="jre/lib/rt.jar"/>
+    </fileset>
+  </path>
+  
+  <property name="project.jdk.home" value="${jdk.home.1.8}"/>
+  <property name="project.jdk.bin" value="${jdk.bin.1.8}"/>
+  <property name="project.jdk.classpath" value="jdk.classpath.1.8"/>
+  
+  
+  <!-- Project Libraries -->
+  
+  <path id="library.com.google.code.gson:gson:2.8.0.classpath">
+    <pathelement location="${basedir}/lib/gson-2.8.0.jar"/>
+  </path>
+  
+  <path id="library.kotlinjavaruntime.classpath">
+    <pathelement location="${path.variable.kotlin_bundled}/lib/kotlin-reflect.jar"/>
+    <pathelement location="${path.variable.kotlin_bundled}/lib/kotlin-runtime.jar"/>
+  </path>
+  
+  <!-- Modules -->
+  
+  
+  <!-- Module FlattenBookmarksDir -->
+  
+  <dirname property="module.flattenbookmarksdir.basedir" file="${ant.file}"/>
+  
+  
+  <property name="module.jdk.home.flattenbookmarksdir" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.flattenbookmarksdir" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.flattenbookmarksdir" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.flattenbookmarksdir" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="flattenbookmarksdir.output.dir" value="${module.flattenbookmarksdir.basedir}/out/production/FlattenBookmarksDir"/>
+  <property name="flattenbookmarksdir.testoutput.dir" value="${module.flattenbookmarksdir.basedir}/out/test/FlattenBookmarksDir"/>
+  
+  <path id="flattenbookmarksdir.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="flattenbookmarksdir.module.production.classpath">
+    <path refid="${module.jdk.classpath.flattenbookmarksdir}"/>
+    <path refid="library.kotlinjavaruntime.classpath"/>
+    <path refid="library.com.google.code.gson:gson:2.8.0.classpath"/>
+  </path>
+  
+  <path id="flattenbookmarksdir.runtime.production.module.classpath">
+    <pathelement location="${flattenbookmarksdir.output.dir}"/>
+    <path refid="library.kotlinjavaruntime.classpath"/>
+    <path refid="library.com.google.code.gson:gson:2.8.0.classpath"/>
+  </path>
+  
+  <path id="flattenbookmarksdir.module.classpath">
+    <path refid="${module.jdk.classpath.flattenbookmarksdir}"/>
+    <pathelement location="${flattenbookmarksdir.output.dir}"/>
+    <path refid="library.kotlinjavaruntime.classpath"/>
+    <path refid="library.com.google.code.gson:gson:2.8.0.classpath"/>
+  </path>
+  
+  <path id="flattenbookmarksdir.runtime.module.classpath">
+    <pathelement location="${flattenbookmarksdir.testoutput.dir}"/>
+    <pathelement location="${flattenbookmarksdir.output.dir}"/>
+    <path refid="library.kotlinjavaruntime.classpath"/>
+    <path refid="library.com.google.code.gson:gson:2.8.0.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.flattenbookmarksdir">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.flattenbookmarksdir">
+    <patternset refid="excluded.from.module.flattenbookmarksdir"/>
+  </patternset>
+  
+  <path id="flattenbookmarksdir.module.sourcepath">
+    <dirset dir="${module.flattenbookmarksdir.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.flattenbookmarksdir" depends="compile.module.flattenbookmarksdir.production,compile.module.flattenbookmarksdir.tests" description="Compile module FlattenBookmarksDir"/>
+  
+  <target name="compile.module.flattenbookmarksdir.production" description="Compile module FlattenBookmarksDir; production classes">
+    <mkdir dir="${flattenbookmarksdir.output.dir}"/>
+    <javac destdir="${flattenbookmarksdir.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.flattenbookmarksdir}/javac">
+      <compilerarg line="${compiler.args.flattenbookmarksdir}"/>
+      <bootclasspath refid="flattenbookmarksdir.module.bootclasspath"/>
+      <classpath refid="flattenbookmarksdir.module.production.classpath"/>
+      <src refid="flattenbookmarksdir.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.flattenbookmarksdir"/>
+    </javac>
+    
+    <copy todir="${flattenbookmarksdir.output.dir}">
+      <fileset dir="${module.flattenbookmarksdir.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.flattenbookmarksdir.tests" depends="compile.module.flattenbookmarksdir.production" description="compile module FlattenBookmarksDir; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.flattenbookmarksdir" description="cleanup module">
+    <delete dir="${flattenbookmarksdir.output.dir}"/>
+    <delete dir="${flattenbookmarksdir.testoutput.dir}"/>
+  </target>
+  
+  <target name="init" description="Build initialization">
+    <!-- Perform any build initialization in this target -->
+  </target>
+  
+  <target name="clean" depends="clean.module.flattenbookmarksdir, clean.artifact.flattenbookmarksdir:jar" description="cleanup all"/>
+  
+  <target name="build.modules" depends="init, clean, compile.module.flattenbookmarksdir" description="build all modules"/>
+  
+  <target name="init.artifacts">
+    <property name="artifacts.temp.dir" value="${basedir}/__artifacts_temp"/>
+    <property name="artifact.output.flattenbookmarksdir:jar" value="${basedir}/out/artifacts/FlattenBookmarksDir_jar"/>
+    <mkdir dir="${artifacts.temp.dir}"/>
+    <property name="temp.jar.path.FlattenBookmarksDir.jar" value="${artifacts.temp.dir}/FlattenBookmarksDir.jar"/>
+  </target>
+  
+  <target name="clean.artifact.flattenbookmarksdir:jar" description="clean FlattenBookmarksDir:jar artifact output">
+    <delete dir="${artifact.output.flattenbookmarksdir:jar}"/>
+  </target>
+  
+  <target name="artifact.flattenbookmarksdir:jar" depends="init.artifacts, compile.module.flattenbookmarksdir" description="Build &#39;FlattenBookmarksDir:jar&#39; artifact">
+    <mkdir dir="${artifact.output.flattenbookmarksdir:jar}"/>
+    <jar destfile="${temp.jar.path.FlattenBookmarksDir.jar}" duplicate="preserve" filesetmanifest="mergewithoutmain">
+      <zipfileset dir="${flattenbookmarksdir.output.dir}"/>
+    </jar>
+    <copy file="${temp.jar.path.FlattenBookmarksDir.jar}" tofile="${artifact.output.flattenbookmarksdir:jar}/FlattenBookmarksDir.jar"/>
+    <copy file="${basedir}/lib/gson-2.8.0.jar" tofile="${artifact.output.flattenbookmarksdir:jar}/gson-2.8.0.jar"/>
+    <copy file="${path.variable.kotlin_bundled}/lib/kotlin-runtime.jar" tofile="${artifact.output.flattenbookmarksdir:jar}/kotlin-runtime.jar"/>
+    <copy file="${path.variable.kotlin_bundled}/lib/kotlin-reflect.jar" tofile="${artifact.output.flattenbookmarksdir:jar}/kotlin-reflect.jar"/>
+  </target>
+  
+  <target name="build.all.artifacts" depends="artifact.flattenbookmarksdir:jar" description="Build all artifacts">
+    
+    <!-- Delete temporary files -->
+    <delete dir="${artifacts.temp.dir}"/>
+  </target>
+  
+  <target name="all" depends="build.modules, build.all.artifacts" description="build all"/>
+</project>

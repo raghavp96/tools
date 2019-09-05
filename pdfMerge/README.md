@@ -1,3 +1,5 @@
+Made September 2017
+
 # pdfMerge
 Simple tool for PDF merging (more utlity to come).
 
