@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Class-Path: fontbox-2.0.7.jar commons-logging-1.2.jar pdfbox-2.0.7.jar
+Main-Class: Runner
+
